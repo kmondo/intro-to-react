@@ -3,28 +3,51 @@
   <head>
     <title>Our Family Tree</title>
   </head>
-
   <body>
-    <p>Our Family Lineage</p>
+
     <div id="app"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+
     <script type="text/babel">
+
       class Greeting extends React.Component {
+        constructor(props){
+          super(props);
+          this.state = {
+            year: 2007
+          }
+        }
+
         render () {
           return (
             <div>
-              <h1>Mondoro Family Tree</h1>
+              <img src={this.props.image} alt="Family Tree"/>
+              <h1>Family Surname: {this.props.family}</h1>
+                <h2>Year Established: {this.state.year}</h2>
+              <p>Updated: {this.props.date.toLocaleDateString()}</p>
             </div>
           );
         }
       }
 
+      const info = {
+        date: new Date(),
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_hpKPxDGgw7_joeHHBgQ7SDWb-P7ALOVufQmAfHwHryMUOk0bVw',
+      }
+
+      Greeting.defaultProps = {
+        family: "Mondoro"
+      }
+
       ReactDOM.render(
-        <Greeting />, document.getElementById('app')
+        <Greeting
+          date={info.date}
+          image={info.image}/>, document.getElementById('app')
       );
+
     </script>
   </body>
-
 </html>
